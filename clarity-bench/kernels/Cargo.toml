@@ -1,0 +1,40 @@
+[package]
+name = "kernels"
+version = "0.1.0"
+edition = "2021"
+description = "Clarity conversion and crypto built-ins, extracted from stacks-core without the Clarity VM"
+
+# Dependency versions and features mirror stacks-common / clarity-types.
+[dependencies]
+sha3 = { version = "0.10.1", default-features = false }
+ripemd = { version = "0.1.1", default-features = false }
+p256 = { version = "0.13", default-features = false, features = ["ecdsa"] }
+ed25519-dalek = { version = "2.1.1", default-features = false }
+# stacks-common uses libsecp256k1 (pure Rust) on wasm targets; we also build it natively
+# so the "same library" comparison is available.
+libsecp256k1 = { version = "0.7.2", default-features = false, features = ["hmac", "lazy-static-context"] }
+# ClarityName / ContractName validation. Same crate as clarity-types; the node build
+# (stackslib) unifies regex to its default features (std, perf, unicode), so use them.
+regex = "=1.12.3"
+
+# Native stacks-common uses the C-backed secp256k1 crate.
+[target.'cfg(not(target_family = "wasm"))'.dependencies]
+secp256k1 = { version = "0.24.3", default-features = false, features = ["std", "recovery"] }
+
+[target.'cfg(all(any(target_arch = "x86_64", target_arch = "x86", target_arch = "aarch64"), not(any(target_os="windows"))))'.dependencies]
+sha2 = { version = "0.10", features = ["asm"] }
+
+[target.'cfg(any(not(any(target_arch = "x86_64", target_arch = "x86", target_arch = "aarch64")), any(target_os="windows")))'.dependencies]
+sha2 = { version = "0.10" }
+
+# Equivalence tests against the real stacks-core code (native only), pinned to the
+# commit the kernels were extracted from (rob-stacks/stacks-core, marf/g3-db-snapshot).
+[dev-dependencies]
+stacks-common = { git = "https://github.com/rob-stacks/stacks-core", rev = "778e37a4d905d74ab5587b777615dd23f22d0940", default-features = false }
+clarity-types = { git = "https://github.com/rob-stacks/stacks-core", rev = "778e37a4d905d74ab5587b777615dd23f22d0940", default-features = false }
+
+# libsecp256k1's `std` feature pulls getrandom through `rand`; like stacks-common's
+# `wasm-deterministic` feature, use getrandom's "custom" backend on wasm (the guest
+# registers a source that always fails — nothing benchmarked needs randomness).
+[target.'cfg(target_family = "wasm")'.dependencies]
+getrandom = { version = "0.2", features = ["custom"] }

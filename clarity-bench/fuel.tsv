@@ -1,0 +1,44 @@
+buff-to-int-le [16-byte buffer]	502
+buff-to-int-be [16-byte buffer]	303
+buff-to-uint-le [16-byte buffer]	502
+buff-to-uint-be [16-byte buffer]	303
+string-to-int? [i128 min (40 chars)]	17307
+string-to-uint? [u128 max (39 chars)]	10678
+int-to-ascii [i128 min]	4886
+int-to-utf8 [i128 min]	112619
+to-ascii? [uint (u128 max)]	7015
+to-ascii? [32-byte buffer]	11608
+to-ascii? [standard principal]	30812
+to-ascii? [contract principal]	35834
+to-ascii? [utf8 string (56 chars)]	13627
+to-consensus-buff? [tuple, 5 fields (194 B)]	20426
+from-consensus-buff? [tuple, 5 fields (194 B)]	225306
+from-consensus-buff? [tuple, 5 fields (194 B), no regex]	211264
+hash160 [32 B]	10420
+sha256 [32 B]	7380
+sha512 [32 B]	9453
+sha512/256 [32 B]	9261
+keccak256 [32 B]	12594
+hash160 [1 KiB]	87819
+sha256 [1 KiB]	84779
+sha512 [1 KiB]	62260
+sha512/256 [1 KiB]	62068
+keccak256 [1 KiB]	85150
+hash160 [64 KiB]	4960491
+sha256 [64 KiB]	4957451
+sha512 [64 KiB]	3385636
+sha512/256 [64 KiB]	3385444
+keccak256 [64 KiB]	4998159
+secp256k1-recover? [chain backend]	3895071
+secp256k1-recover? [libsecp256k1 everywhere]	3895071
+secp256k1-verify [chain backend]	3734191
+secp256k1-verify [libsecp256k1 everywhere]	3734191
+secp256k1-decompress? [chain backend]	167080
+secp256k1-decompress? [libsecp256k1 everywhere]	167080
+secp256r1-verify [Clarity 5+ (prehashed)]	21706590
+secp256r1-verify [Clarity ≤ 4 (double SHA-256)]	21738018
+ed25519-verify [64-byte message]	2327655
+keccak256 [32 B]	32174
+keccak256 [1 KiB]	250682
+keccak256 [64 KiB]	15004226
+secp256k1-verify [hand-written WAT]	30708598

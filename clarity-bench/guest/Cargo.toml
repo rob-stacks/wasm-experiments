@@ -1,0 +1,12 @@
+[package]
+name = "guest"
+version = "0.1.0"
+edition = "2021"
+description = "The kernels compiled as a pure (import-free) wasm module"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+kernels = { path = "../kernels" }
+getrandom = { version = "0.2", features = ["custom"] }

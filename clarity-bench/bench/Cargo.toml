@@ -1,0 +1,18 @@
+[package]
+name = "bench"
+version = "0.1.0"
+edition = "2021"
+description = "Runs the kernels natively and as wasm under wasmtime (Cranelift, Pulley) and wasmi"
+
+[dependencies]
+kernels = { path = "../kernels" }
+wasmtime = "49"
+wasmi = { version = "2", features = ["simd"] }
+wat = "1"
+anyhow = "1"
+wasmparser = "0.261"
+# fixture generation only
+libsecp256k1 = { version = "0.7.2", default-features = false, features = ["hmac", "static-context"] }
+p256 = { version = "0.13", default-features = false, features = ["ecdsa"] }
+ed25519-dalek = { version = "2.1.1", default-features = false }
+sha2 = "0.10"

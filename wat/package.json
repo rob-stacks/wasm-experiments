@@ -1,0 +1,16 @@
+{
+  "name": "wat-crypto",
+  "version": "1.0.0",
+  "description": "Hand-written WAT keccak256 and secp256k1 ECDSA verification",
+  "scripts": {
+    "test": "node test.mjs && node test_ecdsa.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "wabt": "^1.0.39"
+  },
+  "private": true
+}
